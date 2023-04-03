@@ -11,3 +11,5 @@
 local.properties
 apk
 *.apk
+*.log
+/.vscode
