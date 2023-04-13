@@ -30,8 +30,8 @@ class Hook {
     private var server = "https://sdk.mihoyu.cn"
 
     // App
-    //private val package_apk = "com.miHoYo.Yuanshen"
-    private val package_apk = "com.xlpmy.dev"
+    private val package_apk = "com.miHoYo.Yuanshen"
+    //private val package_apk = "com.xlpmy.dev"
     private val injek_activity = "com.miHoYo.GetMobileInfo.MainActivity"
     private val path = "/data/user/0/${package_apk}"
     private val file_json = "/data/user/0/${package_apk}/server.json"
