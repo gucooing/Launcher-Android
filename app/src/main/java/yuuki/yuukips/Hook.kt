@@ -30,7 +30,8 @@ class Hook {
     private var server = "https://sdk.mihoyu.cn"
 
     // App
-    private val package_apk = "com.miHoYo.Yuanshen"
+    //private val package_apk = "com.miHoYo.Yuanshen"
+    private val package_apk = "com.xlpmy.dev"
     private val injek_activity = "com.miHoYo.GetMobileInfo.MainActivity"
     private val path = "/data/user/0/${package_apk}"
     private val file_json = "/data/user/0/${package_apk}/server.json"
@@ -157,7 +158,7 @@ class Hook {
         AlertDialog.Builder(activity).apply {
             setCancelable(false)
             setTitle("欢迎来到私人服务器")
-            setMessage("采用yuuki开源模块制作\n请不要将此apk应用于商业行为\n否则将不会推出后续版本\n第一次使用请直接点击前往游戏下载资源\n项目地址:https://github.com/geikun/Launcher-Android")
+            setMessage("采用开源模块制作\n请不要将此apk应用于商业行为\n否则将不会推出后续版本\n第一次使用请直接点击前往游戏下载资源\n项目地址:https://github.com/geikun/Launcher-Android\n目前发现客户端《真·原神·C》包名：com.miHoYo.C.GenshinProxy 非法接入")
             setPositiveButton("前往游戏") { _, _ ->
             server = z3roJson.getString("server")
             Toast.makeText(activity, "加入的服务器地址: $server", Toast.LENGTH_LONG).show()
@@ -188,16 +189,18 @@ class Hook {
                         @SuppressLint("CommitPrefEdits")
                         override fun afterTextChanged(p0: Editable) {
                             server = p0.toString()
-                            if(server == "sdk" || server == "资源下载" && server != ""){
+                            if(server == "sdk"){
                                 server = "https://sdk.mihoyu.cn"
-                            } else if (server.contains("localhost") && server != "") {
+                            }else if (server == "login"){
+                                    server = "https://login.mihoyu.cn"
+                                } else if (server.contains("localhost") && server != "") {
                                 server = server.replace("localhost", "https://127.0.0.1")
                                 if (server.contains(" ")) {
                                     server = server.replace(" ", ":")
                                 }
                             } else if (server == "https://" || server == "http://" && server != "") {
-                                server = ""
-                            } else if (!server.startsWith("https://") && (!server.startsWith("http://")) && server != "" && server != "sdk" && server != "资源下载") {
+                                server = ""//不敢动
+                            } else if (!server.startsWith("https://") && (!server.startsWith("http://")) && server != "" && server != "sdk" && server != "login") {
                                 server = "https://"+server
                             } else if (server == "") {
                                 server = ""
