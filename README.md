@@ -1,7 +1,3 @@
-# 目前发现客户端《真·原神·C》包名：com.miHoYo.C.GenshinProxy 非法接入
-
-希望知情者可以联系
-
 # Anime Game APK Proxy
 This code source is from [577fkj](https://github.com/577fkj) ,which is currently source code has been closed since version 1.7 because they don't want people to use this app for buying private server accounts. here I am just fixing the code so that it can be supported with version 2.8 including being able to login to a custom server without having to use a modified apk made in China which only allows using their server.
 
