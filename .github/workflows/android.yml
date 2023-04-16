@@ -24,6 +24,3 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-      
-    - name: Zip app-release-unsigned
-      run: tar -cvzf app-release-unsigned.tar "/home/runner/work/Launcher-Android/app/build/outputs/apk/release"
