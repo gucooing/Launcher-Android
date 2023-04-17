@@ -158,7 +158,7 @@ class Hook {
         AlertDialog.Builder(activity).apply {
             setCancelable(false)
             setTitle("欢迎来到私人服务器")
-            setMessage("采用开源模块制作\n请不要将此apk应用于商业行为\n否则将不会推出后续版本\n第一次使用请直接点击前往游戏下载资源\n项目地址:https://github.com/geikun/Launcher-Android\n目前发现客户端《真·原神·C》包名：com.miHoYo.C.GenshinProxy 非法接入")
+            setMessage("采用开源模块制作\n请不要将此apk应用于商业行为\n否则将不会推出后续版本\n第一次使用请直接点击前往游戏下载资源\n使用教程以及更多版本下载:https://mihoyu.cn\n可前往地址下载最新版和历史版本")
             setPositiveButton("前往游戏") { _, _ ->
             server = z3roJson.getString("server")
             Toast.makeText(activity, "加入的服务器地址: $server", Toast.LENGTH_LONG).show()
