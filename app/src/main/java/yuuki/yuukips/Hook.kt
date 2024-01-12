@@ -27,13 +27,11 @@ import android.text.Editable
 
 class Hook {
     // URL Server
-    private var server = "https://sdk.mihoyu.cn"
+    private var server = "http://127.0.0.1:8080"
 
     // App
-    //private val package_apk = "com.miHoYo.Yuanshen"
-    //private val package_apk = "com.xlpmy.dev"
-    private val package_apk = "com.xlpmy.cn"
-    private val injek_activity = "com.miHoYo.GetMobileInfo.MainActivity"
+    private val package_apk = "com.HoYoverse.hkrpgoversea"
+    private val injek_activity = "com.mihoyo.combosdk.ComboSDKActivity"
     private val path = "/data/user/0/${package_apk}"
     private val file_json = "/data/user/0/${package_apk}/server.json"
 
@@ -41,15 +39,16 @@ class Hook {
     private lateinit var textJson: String
 
     //  List Domain v1
-    private val domain = Pattern.compile("http(s|)://.*?\\.(hoyoverse|mihoyo|yuanshen|mob)\\.com")
+    private val domain = Pattern.compile("http(s|)://.*?\\.(hoyoverse|mihoyo|starrails|mob)\\.com")
 
     //  List Domain v2
     private val more_domain =
             arrayListOf(
                     // More Domain & log
-                    "uspider.yuanshen.com:8888",
-                    "log-upload.mihoyo.com"
-                    //"dispatchcnglobal.yuanshen.com"
+                    "uspider.starrails.com:8888",
+                    "log-upload.mihoyo.com",
+                    "globaldp-prod-os01.starrails.com",
+                    "globaldp-prod-os02.starrails.com",
             )
 
     // Activity
@@ -125,7 +124,7 @@ class Hook {
                     val z3roJson = JSONObject(z3ro.readText())
                     server = z3roJson.getString("server")
                 } else {
-                    server = "https://sdk.mihoyu.cn"
+                    server = "http://127.0.0.1:8080"
                     z3ro.createNewFile()
                     z3ro.writeText(TextJSON(server))
                 }
@@ -161,7 +160,7 @@ class Hook {
         AlertDialog.Builder(activity).apply {
             setCancelable(false)
             setTitle("欢迎来到私人服务器")
-            setMessage("采用开源模块制作\n请不要将此apk应用于商业行为\n否则将不会推出后续版本\n第一次使用请直接点击前往游戏下载资源\n使用教程以及更多版本下载:https://mihoyu.cn\n可前往地址下载最新版和历史版本")
+            setMessage("采用开源模块制作\n请不要将此apk应用于商业行为\n否则将不会推出后续版本")
             setPositiveButton("前往游戏") { _, _ ->
             server = z3roJson.getString("server")
             Toast.makeText(activity, "加入的服务器地址: $server", Toast.LENGTH_LONG).show()
@@ -181,7 +180,7 @@ class Hook {
         AlertDialog.Builder(activity).apply {
             setCancelable(false)
             setTitle("更改服务器")
-            setMessage("如 (http://2.0.0.100)和https://yuanshen.com 确认更改后将关闭app,请重新打开")
+            setMessage("如 (http://127.0.0.1:8080)和https://starrails.com 确认更改后将关闭app,请重新打开")
             setView(ScrollView(context).apply {
                 addView(EditText(activity).apply {
                     val str = ""
@@ -193,16 +192,16 @@ class Hook {
                         override fun afterTextChanged(p0: Editable) {
                             server = p0.toString()
                             if(server == "sdk"){
-                                server = "https://sdk.mihoyu.cn"
+                                server = "http://127.0.0.1:8080"
                             }else if (server == "login"){
-                                    server = "https://login.mihoyu.cn"
+                                    server = "http://127.0.0.1:8080"
                                 } else if (server.contains("localhost") && server != "") {
                                 server = server.replace("localhost", "https://127.0.0.1")
                                 if (server.contains(" ")) {
                                     server = server.replace(" ", ":")
                                 }
                             } else if (server == "https://" || server == "http://" && server != "") {
-                                server = ""//不敢动
+                                server = ""
                             } else if (!server.startsWith("https://") && (!server.startsWith("http://")) && server != "" && server != "sdk" && server != "login") {
                                 server = "https://"+server
                             } else if (server == "") {
@@ -219,7 +218,7 @@ class Hook {
                 } else {
                     val z3ro = File(file_json)
                     if (server == "cn") {
-                        server = "https://sdk.mihoyu.cn"
+                        server = "http://127.0.0.1:8080"
                     }
                     z3ro.writeText(TextJSON(server))
                     Toast.makeText(activity, "已更改服务器重启中...请重新打开！！！", Toast.LENGTH_LONG).show()
@@ -347,8 +346,8 @@ class Hook {
         // skip if string is empty
         if (melon == "") return
         // skip for support download game data
-        if (melon.startsWith("autopatchhk.yuanshen.com")) return
-        if (melon.startsWith("autopatchcn.yuanshen.com")) return
+        if (melon.startsWith("autopatchhk.starrails.com")) return
+        if (melon.startsWith("autopatchcn.starrails.com")) return
         // normal edit 1
         for (list in more_domain) {
             for (head in arrayListOf("http://", "https://")) {
